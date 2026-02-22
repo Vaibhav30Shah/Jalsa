@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jalsa – myMouthh Fresheners</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --deep-green: #1a4731;
+      --cream: #fdf6ec;
+      --rose: #e8b4bc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: #1a1a1a;
+      overflow-x: hidden;
+    }
+
+    .parallax-bg {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    #navbar { transition: all 0.4s ease; }
+    #navbar.scrolled {
+      background: rgba(26, 71, 49, 0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d2b1e 0%, #1a4731 40%, #0d2b1e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-particles span {
+      position: absolute;
+      border-radius: 50%;
+      animation: float 6s infinite ease-in-out;
+      opacity: 0.15;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    .shine-text {
+      background: linear-gradient(90deg, #c9a84c, #fff7d4, #c9a84c, #e8c87a);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 300% center; }
+    }
+
+    .logo-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #c9a84c, #e8c87a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(201, 168, 76, 0.5);
+      animation: pulse-glow 3s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 30px rgba(201,168,76,0.5); }
+      50% { box-shadow: 0 0 60px rgba(201,168,76,0.9), 0 0 100px rgba(201,168,76,0.3); }
+    }
+
+    .scroll-indicator { animation: bounce-down 2s infinite; }
+
+    @keyframes bounce-down {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    .product-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    }
+
+    .product-card .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1;
+    }
+
+    .product-card:hover .card-overlay { opacity: 1; }
+
+    .product-card .flavor-notes {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      background: rgba(0,0,0,0.85);
+      padding: 1rem;
+      z-index: 2;
+    }
+
+    .product-card:hover .flavor-notes { transform: translateY(0); }
+
+    .prod-pan { background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 50%, #c9a84c 100%); }
+    .prod-rose { background: linear-gradient(135deg, #6b2737 0%, #c4738a 50%, #e8b4bc 100%); }
+    .prod-badam { background: linear-gradient(135deg, #7a4f1a 0%, #c9843a 50%, #e8c87a 100%); }
+    .prod-pack { background: linear-gradient(135deg, #1a2a4a 0%, #2d4a7a 50%, #c9a84c 100%); }
+
+    .usp-parallax {
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .usp-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .usp-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(201,168,76,0.2);
+    }
+
+    .lifestyle-parallax {
+      background-attachment: fixed;
+      background-image: linear-gradient(135deg, #0d2b1e 0%, #1a4731 100%);
+      position: relative;
+    }
+
+    .lifestyle-scroll-track {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .lifestyle-scroll-track::-webkit-scrollbar { display: none; }
+
+    .lifestyle-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      border-radius: 1.5rem;
+      opacity: 0.55;
+    }
+
+    .lifestyle-card-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .ingredient-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .ingredient-tag:hover {
+      background: rgba(201,168,76,0.25);
+      transform: scale(1.05);
+    }
+
+    .testimonial-card { transition: transform 0.3s; }
+    .testimonial-card:hover { transform: translateY(-5px); }
+
+    .cta-parallax {
+      background: linear-gradient(to bottom right, #0d2b1e, #1a4731, #0d2b1e);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+
+    .fade-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+    #mobile-menu {
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    #mobile-menu.open { max-height: 400px; opacity: 1; }
+
+    .stars { color: #c9a84c; }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #c9a84c, #e8c87a);
+      color: #0d2b1e;
+      font-weight: 700;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gold::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #e8c87a, #fff7d4);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-gold:hover::after { opacity: 0.3; }
+    .btn-gold:hover { transform: scale(1.04); box-shadow: 0 8px 25px rgba(201,168,76,0.5); }
+
+    .btn-outline-gold {
+      border: 2px solid #c9a84c;
+      color: #c9a84c;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-outline-gold:hover { background: #c9a84c; color: #0d2b1e; }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, #c9a84c, transparent);
+      margin: 0 auto;
+    }
+
+    #cart-count {
+      background: #c9a84c;
+      color: #0d2b1e;
+      font-size: 0.65rem;
+      font-weight: 800;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-input {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: #fdf6ec;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: #c9a84c;
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    }
+    .form-input::placeholder { color: rgba(253,246,236,0.4); }
+
+    .leaf {
+      position: absolute;
+      opacity: 0.08;
+      animation: drift 8s infinite ease-in-out;
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(120deg); }
+      66% { transform: translateY(10px) rotate(240deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    section { scroll-margin-top: 70px; }
+
+    /* Instagram grid image styling */
+    .insta-grid-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1rem;
+      transition: transform 0.4s ease;
+    }
+    .insta-grid-item:hover .insta-grid-img { transform: scale(1.06); }
+    .insta-grid-item {
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+
+    /* Product card image cover */
+    .prod-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ============================
+     NAVBAR
+============================= -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-3 group">
+      <div class="logo-icon w-10 h-10" style="width:44px;height:44px;">
+        <span style="font-size:1.4rem;">🌿</span>
+      </div>
+      <div>
+        <div class="font-black text-2xl tracking-widest shine-text" style="font-family:'Playfair Display',serif;">JALSA</div>
+        <div class="text-xs text-yellow-200 opacity-70 tracking-wider -mt-1">myMouthh</div>
+      </div>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white">
+      <li><a href="#hero" class="hover:text-yellow-300 transition-colors">Home</a></li>
+      <li><a href="#products" class="hover:text-yellow-300 transition-colors">Products</a></li>
+      <li><a href="#about" class="hover:text-yellow-300 transition-colors">About</a></li>
+      <li><a href="#ingredients" class="hover:text-yellow-300 transition-colors">Ingredients</a></li>
+      <li><a href="#reviews" class="hover:text-yellow-300 transition-colors">Reviews</a></li>
+      <li><a href="#contact" class="hover:text-yellow-300 transition-colors">Contact</a></li>
+    </ul>
+
+    <div class="flex items-center gap-4">
+      <button onclick="toggleCart()" class="relative text-white hover:text-yellow-300 transition-colors hidden md:block">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+        </svg>
+        <span id="cart-count" class="absolute -top-2 -right-2">0</span>
+      </button>
+      <a href="#products" class="btn-gold hidden md:inline-flex px-5 py-2 rounded-full text-sm">Shop Now</a>
+      <button id="hamburger" onclick="toggleMenu()" class="md:hidden text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden bg-green-900 mt-2 rounded-xl px-6">
+    <ul class="py-4 flex flex-col gap-4 text-white text-sm font-medium">
+      <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
+      <li><a href="#products" onclick="toggleMenu()">Products</a></li>
+      <li><a href="#about" onclick="toggleMenu()">About</a></li>
+      <li><a href="#ingredients" onclick="toggleMenu()">Ingredients</a></li>
+      <li><a href="#reviews" onclick="toggleMenu()">Reviews</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      <li><a href="#products" onclick="toggleMenu()" class="btn-gold inline-block px-5 py-2 rounded-full text-center">Shop Now</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ============================
+     HERO SECTION
+============================= -->
+<section id="hero" class="relative flex items-center justify-center min-h-screen overflow-hidden">
+  <div class="hero-particles absolute inset-0 pointer-events-none">
+    <span style="width:120px;height:120px;top:10%;left:5%;background:#c9a84c;animation-delay:0s;animation-duration:7s;"></span>
+    <span style="width:60px;height:60px;top:70%;left:15%;background:#e8b4bc;animation-delay:1s;animation-duration:5s;"></span>
+    <span style="width:200px;height:200px;top:20%;right:5%;background:#1a4731;opacity:0.3;animation-delay:2s;animation-duration:9s;"></span>
+    <span style="width:80px;height:80px;bottom:15%;right:20%;background:#c9a84c;animation-delay:3s;animation-duration:6s;"></span>
+    <span style="width:40px;height:40px;top:50%;left:50%;background:#e8c87a;animation-delay:0.5s;animation-duration:8s;"></span>
+  </div>
+
+  <div class="leaf" style="font-size:4rem;top:15%;left:8%;animation-delay:0s;">🌿</div>
+  <div class="leaf" style="font-size:2.5rem;top:60%;right:10%;animation-delay:2s;">🌹</div>
+  <div class="leaf" style="font-size:3rem;bottom:20%;left:20%;animation-delay:4s;">✨</div>
+  <div class="leaf" style="font-size:2rem;top:30%;right:25%;animation-delay:1.5s;">🌸</div>
+
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <!-- <div class="inline-flex items-center gap-2 bg-white bg-opacity-10 border border-yellow-400 border-opacity-30 rounded-full px-5 py-2 text-yellow-200 text-xs font-medium tracking-widest uppercase mb-8 fade-up">
+      <span>✦</span> Premium Mouth Freshener <span>✦</span>
+    </div> -->
+
+    <!-- Logo Circle -->
+    <div class="flex justify-center mb-6 fade-up" style="transition-delay:0.1s;">
+      <div class="logo-icon" style="width:100px;height:100px;">
+        <span style="font-size:2.5rem;">🌿</span>
+      </div>
+    </div>
+
+    <h1 class="text-8xl md:text-9xl font-black tracking-widest mb-4 fade-up" style="font-family:'Playfair Display',serif;transition-delay:0.2s;">
+      <span class="shine-text">JALSA</span>
+    </h1>
+
+    <p class="text-2xl md:text-3xl text-yellow-100 mb-2 fade-up" style="font-family:'Dancing Script',cursive;transition-delay:0.3s;">
+      Greatness Shines from Within
+    </p>
+
+    <p class="text-yellow-300 text-sm tracking-widest uppercase mb-10 fade-up" style="transition-delay:0.4s;">
+      myMouthh Fresheners
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up" style="transition-delay:0.5s;">
+      <a href="#products" class="btn-gold px-10 py-4 rounded-full text-lg inline-block">
+        ✦ Explore Flavours
+      </a>
+      <a href="#about" class="btn-outline-gold px-8 py-4 rounded-full text-lg inline-block">
+        Our Story
+      </a>
+    </div>
+
+    <!-- ✅ IMAGE 1: Hero product showcase (WhatsApp-Image-2026-02-22-at-11.59.00.jpg) -->
+    <div class="mt-14 fade-up" style="transition-delay:0.65s;">
+      <img
+        src="imj1.jpeg"
+        alt="Jalsa three flavour tins — Paan Coco Bliss, Gulkand Rose Rush, Kesari Nut Nirvana"
+        class="rounded-3xl shadow-2xl mx-auto"
+        style="max-width:700px;width:100%;object-fit:cover;border:1px solid rgba(201,168,76,0.3);"
+      />
+    </div>
+
+    <div class="scroll-indicator mt-10 text-yellow-300 fade-up" style="transition-delay:0.75s;">
+      <p class="text-xs tracking-widest uppercase mb-2">Scroll to Discover</p>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#fdf6ec"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ============================
+     PRODUCTS SECTION
+============================= -->
+<section id="products" class="py-24 bg-cream" style="background-color:#fdf6ec;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 fade-up">
+      <span class="text-xs tracking-widest uppercase text-yellow-600 font-semibold">Our Collection</span>
+      <h2 class="text-5xl font-black mt-2 mb-4" style="font-family:'Playfair Display',serif;color:#0d2b1e;">
+        Choose Your <span class="shine-text" style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#c9a84c,#e8c87a,#c9a84c);background-size:300%;-webkit-background-clip:text;animation:shimmer 4s infinite linear;background-clip:text;">Flavour</span>
+      </h2>
+      <div class="divider w-32 mb-4"></div>
+      <p class="text-gray-500 max-w-xl mx-auto">Crafted from the finest natural ingredients, each bite is a journey into authentic Indian flavour traditions.</p>
+    </div>
+
+    <!-- ✅ IMAGE 2: Full-width packaging showcase above cards (WhatsApp-Image-2026-02-22-at-11.58.59.jpg) -->
+    <div class="flex justify-center mb-14 fade-up">
+      <img
+        src="img2.jpeg"
+        alt="Jalsa packaging — Pan Coconut (green), Rose Gulkand (pink), Badam Kesar Elaichi (gold)"
+        class="rounded-3xl shadow-xl"
+        style="max-width:680px;width:100%;object-fit:cover;border:1px solid rgba(201,168,76,0.2);"
+      />
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <!-- Card 1: Pan & Coconut -->
+      <div class="product-card bg-white rounded-3xl shadow-xl overflow-hidden fade-up" style="transition-delay:0.1s;">
+        <div class="prod-pan h-52 flex items-center justify-center relative overflow-hidden">
+          <!-- Pan & Coconut card uses left-crop of packaging image -->
+          <img
+            src="paan.jpeg"
+            alt="Pan Coconut tin"
+            class="prod-card-img"
+            style="object-position:15% center;"
+          />
+          <div class="card-overlay"></div>
+          <div class="flavor-notes text-white text-xs">
+            <p class="font-bold text-yellow-300 mb-1">Flavour Profile</p>
+            <p>Crisp betel, sweet coconut shreds, hint of cardamom — a tropical burst that lingers.</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <h3 class="font-bold text-lg" style="color:#0d2b1e;font-family:'Playfair Display',serif;">Pan & Coconut</h3>
+              <p class="text-xs text-gray-400 mt-0.5">Spicy-sweet tropical burst</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black" style="color:#c9a84c;">₹99</div>
+              <div class="text-xs text-gray-400">per pack</div>
+            </div>
+          </div>
+          <div class="stars text-sm mb-4">★★★★★ <span class="text-gray-400 text-xs">(124)</span></div>
+          <ul class="text-xs text-gray-500 mb-4 space-y-1">
+            <li>✅ 100% natural ingredients</li>
+            <li>✅ Long-lasting freshness</li>
+            <li>✅ Digestive-friendly blend</li>
+          </ul>
+          <button onclick="addToCart('Pan & Coconut', 99)" class="btn-gold w-full py-3 rounded-xl text-sm">
+            Add to Cart 🛒
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Rose & Gulkon -->
+      <div class="product-card bg-white rounded-3xl shadow-xl overflow-hidden fade-up" style="transition-delay:0.2s;">
+        <div class="prod-rose h-52 flex items-center justify-center relative overflow-hidden">
+          <!-- Rose card uses center-crop of packaging image -->
+          <img
+            src="rose.jpeg"
+            alt="Rose Gulkand tin"
+            class="prod-card-img"
+            style="object-position:50% center;"
+          />
+          <div class="card-overlay"></div>
+          <div class="flavor-notes text-white text-xs">
+            <p class="font-bold text-pink-300 mb-1">Flavour Profile</p>
+            <p>Velvety gulkand with rose petals — floral, honeyed elegance with every bite.</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <h3 class="font-bold text-lg" style="color:#0d2b1e;font-family:'Playfair Display',serif;">Rose & Gulkon</h3>
+              <p class="text-xs text-gray-400 mt-0.5">Floral honeyed elegance</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black" style="color:#c9a84c;">₹99</div>
+              <div class="text-xs text-gray-400">per pack</div>
+            </div>
+          </div>
+          <div class="stars text-sm mb-4">★★★★★ <span class="text-gray-400 text-xs">(98)</span></div>
+          <ul class="text-xs text-gray-500 mb-4 space-y-1">
+            <li>✅ Rose petal concentrate</li>
+            <li>✅ Cooling throat effect</li>
+            <li>✅ Zero artificial colour</li>
+          </ul>
+          <button onclick="addToCart('Rose & Gulkon', 99)" class="btn-gold w-full py-3 rounded-xl text-sm">
+            Add to Cart 🛒
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: Badam Kesar Elaichi -->
+      <div class="product-card bg-white rounded-3xl shadow-xl overflow-hidden fade-up" style="transition-delay:0.3s;">
+        <div class="prod-badam h-52 flex items-center justify-center relative overflow-hidden">
+          <!-- Badam card uses right-crop of packaging image -->
+          <img
+            src="kesar.jpeg"
+            alt="Badam Kesar Elaichi tin"
+            class="prod-card-img"
+            style="object-position:85% center;"
+          />
+          <div class="card-overlay"></div>
+          <div class="flavor-notes text-white text-xs">
+            <p class="font-bold text-yellow-300 mb-1">Flavour Profile</p>
+            <p>Premium almonds, royal saffron threads, and cardamom pods — nutty luxury.</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <h3 class="font-bold text-lg" style="color:#0d2b1e;font-family:'Playfair Display',serif;">Badam Kesar Elaichi</h3>
+              <p class="text-xs text-gray-400 mt-0.5">Nutty saffron luxury</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black" style="color:#c9a84c;">₹129</div>
+              <div class="text-xs text-gray-400">per pack</div>
+            </div>
+          </div>
+          <div class="stars text-sm mb-4">★★★★★ <span class="text-gray-400 text-xs">(211)</span></div>
+          <ul class="text-xs text-gray-500 mb-4 space-y-1">
+            <li>✅ Real kesar saffron</li>
+            <li>✅ Brain & memory support</li>
+            <li>✅ Rich nutty aroma</li>
+          </ul>
+          <button onclick="addToCart('Badam Kesar Elaichi', 129)" class="btn-gold w-full py-3 rounded-xl text-sm">
+            Add to Cart 🛒
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4: Pack of Three -->
+      <div class="product-card bg-white rounded-3xl shadow-xl overflow-hidden fade-up" style="transition-delay:0.4s;">
+        <div class="prod-pack h-52 flex items-center justify-center relative overflow-hidden">
+          <!-- Pack of Three uses the hero cinematic image showing all 3 open tins -->
+          <img
+            src="imj1.jpeg"
+            alt="Jalsa Pack of Three — all flavours"
+            class="prod-card-img"
+            style="object-position:center center;"
+          />
+          <div class="card-overlay"></div>
+          <div class="absolute top-4 right-4 bg-yellow-400 text-green-900 text-xs font-black px-3 py-1 rounded-full z-10">BEST DEAL</div>
+          <div class="flavor-notes text-white text-xs">
+            <p class="font-bold text-yellow-300 mb-1">What's Inside</p>
+            <p>All three signature flavours — Pan Coconut + Rose Gulkon + Badam Kesar Elaichi. Save ₹48!</p>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <h3 class="font-bold text-lg" style="color:#0d2b1e;font-family:'Playfair Display',serif;">Pack of Three</h3>
+              <p class="text-xs text-gray-400 mt-0.5">All flavours bundled</p>
+            </div>
+            <div class="text-right">
+              <div class="text-xl font-black" style="color:#c9a84c;">₹279</div>
+              <div class="text-xs text-red-400 line-through">₹327</div>
+            </div>
+          </div>
+          <div class="stars text-sm mb-4">★★★★★ <span class="text-gray-400 text-xs">(356)</span></div>
+          <ul class="text-xs text-gray-500 mb-4 space-y-1">
+            <li>✅ Save ₹48 on bundle</li>
+            <li>✅ Perfect gifting option</li>
+            <li>✅ All 3 premium flavours</li>
+          </ul>
+          <button onclick="addToCart('Pack of Three', 279)" class="btn-gold w-full py-3 rounded-xl text-sm">
+            Add to Cart 🛒
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-6 fade-up">
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="text-2xl">🚚</span> Free shipping above ₹500
+      </div>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="text-2xl">🔒</span> Secure checkout
+      </div>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="text-2xl">🌿</span> 100% vegan &amp; natural
+      </div>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="text-2xl">↩️</span> Easy 7-day returns
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================
+     WHY JALSA (USP / ABOUT)
+============================= -->
+<section id="about" class="py-24 parallax-bg usp-parallax" style="background-color:#0d2b1e;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 fade-up">
+      <span class="text-xs tracking-widest uppercase text-yellow-400 font-semibold">Why Choose Us</span>
+      <h2 class="text-5xl font-black mt-2 mb-4 text-white" style="font-family:'Playfair Display',serif;">
+        The Jalsa <span class="shine-text">Difference</span>
+      </h2>
+      <div class="divider w-32 mb-4"></div>
+      <p class="text-green-200 max-w-xl mx-auto">Every ingredient is chosen with intention. Every flavour is crafted with heritage. Every bite is a celebration.</p>
+    </div>
+
+    <div class="bg-white bg-opacity-5 border border-yellow-400 border-opacity-10 rounded-3xl p-8 md:p-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div class="usp-card text-center bg-white bg-opacity-5 rounded-2xl p-6 fade-up" style="transition-delay:0.1s;">
+          <div class="text-5xl mb-4">🌿</div>
+          <h3 class="text-white font-bold text-lg mb-2" style="font-family:'Playfair Display',serif;">Heritage Ingredients</h3>
+          <p class="text-green-200 text-sm">Sourced from the same farms that have supplied India's finest kitchens for generations.</p>
+        </div>
+
+        <div class="usp-card text-center bg-white bg-opacity-5 rounded-2xl p-6 fade-up" style="transition-delay:0.2s;">
+          <div class="text-5xl mb-4">❤️</div>
+          <h3 class="text-white font-bold text-lg mb-2" style="font-family:'Playfair Display',serif;">Digestive-Friendly</h3>
+          <p class="text-green-200 text-sm">Each blend supports digestion with natural botanicals — no chemicals, no compromises.</p>
+        </div>
+
+        <div class="usp-card text-center bg-white bg-opacity-5 rounded-2xl p-6 fade-up" style="transition-delay:0.3s;">
+          <div class="text-5xl mb-4">🫙</div>
+          <h3 class="text-white font-bold text-lg mb-2" style="font-family:'Playfair Display',serif;">Premium Packaging</h3>
+          <p class="text-green-200 text-sm">Elegantly sealed to preserve freshness and present a gift-worthy aesthetic.</p>
+        </div>
+
+        <div class="usp-card text-center bg-white bg-opacity-5 rounded-2xl p-6 fade-up" style="transition-delay:0.4s;">
+          <div class="text-5xl mb-4">✨</div>
+          <h3 class="text-white font-bold text-lg mb-2" style="font-family:'Playfair Display',serif;">After-Meal Luxury</h3>
+          <p class="text-green-200 text-sm">Transform a simple ritual into an experience that lingers beautifully — bite after bite.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Brand Story -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="fade-left">
+        <span class="text-xs tracking-widest uppercase text-yellow-400 font-semibold">Our Story</span>
+        <h3 class="text-4xl font-black text-white mt-2 mb-6" style="font-family:'Playfair Display',serif;">
+          Born from Indian <br/>Tradition &amp; Pride
+        </h3>
+        <p class="text-green-200 leading-relaxed mb-4">
+          Jalsa was born out of a simple belief — that the ritual of freshening your breath should be as luxurious as the meal that preceded it. Rooted in centuries-old Ayurvedic wisdom and the vibrant flavours of India's spice heritage, we create experiences, not just products.
+        </p>
+        <p class="text-green-200 leading-relaxed mb-6">
+          From the gulkand of Rajasthan to the saffron fields of Kashmir and coconut groves of Kerala, every Jalsa pack carries the soul of its origin.
+        </p>
+        <div class="flex gap-8">
+          <div class="text-center">
+            <div class="text-4xl font-black shine-text" style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#c9a84c,#e8c87a);-webkit-background-clip:text;background-clip:text;">50K+</div>
+            <div class="text-green-300 text-xs mt-1">Happy Customers</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-black" style="color:#c9a84c;">100%</div>
+            <div class="text-green-300 text-xs mt-1">Natural Ingredients</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-black" style="color:#c9a84c;">3</div>
+            <div class="text-green-300 text-xs mt-1">Signature Flavours</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ Right column: Product packaging image + timeline -->
+      <div class="fade-right">
+        <img
+          src="img2.jpeg"
+          alt="Jalsa three packaging variants — heritage craftsmanship"
+          class="rounded-2xl shadow-2xl w-full mb-8"
+          style="border:1px solid rgba(201,168,76,0.25);max-height:260px;object-fit:cover;"
+        />
+        <div class="space-y-4">
+          <div class="flex gap-4 items-start">
+            <div class="w-3 h-3 rounded-full mt-1.5 flex-shrink-0" style="background:#c9a84c;"></div>
+            <div>
+              <div class="text-yellow-300 font-semibold text-sm">2020 — The Beginning</div>
+              <div class="text-green-200 text-sm">Started in a home kitchen with one recipe: pure gulkand and rose petal freshener.</div>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-3 h-3 rounded-full mt-1.5 flex-shrink-0" style="background:#c9a84c;"></div>
+            <div>
+              <div class="text-yellow-300 font-semibold text-sm">2021 — First 1000 Customers</div>
+              <div class="text-green-200 text-sm">Word spread through local bazaars and weddings. Pan & Coconut was added to the lineup.</div>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-3 h-3 rounded-full mt-1.5 flex-shrink-0" style="background:#c9a84c;"></div>
+            <div>
+              <div class="text-yellow-300 font-semibold text-sm">2022 — The Royal Blend</div>
+              <div class="text-green-200 text-sm">Badam Kesar Elaichi was introduced — inspired by Mughal court traditions.</div>
+            </div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-3 h-3 rounded-full mt-1.5 flex-shrink-0" style="background:#c9a84c;"></div>
+            <div>
+              <div class="text-yellow-300 font-semibold text-sm">2024 — Going National</div>
+              <div class="text-green-200 text-sm">Jalsa is now available pan-India, with 50,000+ families choosing our fresheners daily.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================
+     LIFESTYLE SECTION
+============================= -->
+<section class="py-24 overflow-hidden" style="background-color:#fdf6ec;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-12 fade-up">
+      <span class="text-xs tracking-widest uppercase text-yellow-600 font-semibold">The Jalsa Way</span>
+      <h2 class="text-5xl font-black mt-2 mb-4" style="font-family:'Playfair Display',serif;color:#0d2b1e;">
+        Every Meal, A <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#c9a84c,#e8c87a,#c9a84c);background-size:300%;-webkit-background-clip:text;animation:shimmer 4s infinite linear;background-clip:text;">Celebration</span>
+      </h2>
+      <p class="text-gray-500 max-w-xl mx-auto">"Jalsa turns every meal into a celebration." — because you deserve that final flourish.</p>
+    </div>
+
+    <!-- Horizontal scrolling lifestyle moments -->
+    <div class="lifestyle-scroll-track flex gap-6 pb-4 cursor-grab active:cursor-grabbing" id="lifestyleScroll">
+
+      <!-- Fine Dining Card -->
+      <div class="flex-shrink-0 w-72 h-80 rounded-3xl shadow-lg overflow-hidden relative" style="background:linear-gradient(135deg,#1a4731,#2d6b4f);">
+        <!-- Placeholder for a fine dining / thali photo. Replace src with actual image. -->
+        <img
+          src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=80"
+          alt="Fine dining Indian thali"
+          class="lifestyle-card-img"
+          onerror="this.style.display='none'"
+        />
+        <div class="lifestyle-card-content">
+          <div style="font-size:3rem;" class="mb-2">🍽️</div>
+          <h4 class="text-white font-bold text-lg" style="font-family:'Playfair Display',serif;">Fine Dining</h4>
+          <p class="text-green-200 text-sm text-center">End a lavish dinner with a pinch of Jalsa — the perfect palate cleanser.</p>
+        </div>
+      </div>
+
+      <!-- Weddings Card -->
+      <div class="flex-shrink-0 w-72 h-80 rounded-3xl shadow-lg overflow-hidden relative" style="background:linear-gradient(135deg,#6b2737,#a34a5e);">
+        <img
+          src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&q=80"
+          alt="Indian wedding celebration"
+          class="lifestyle-card-img"
+          onerror="this.style.display='none'"
+        />
+        <div class="lifestyle-card-content">
+          <div style="font-size:3rem;" class="mb-2">💍</div>
+          <h4 class="text-white font-bold text-lg" style="font-family:'Playfair Display',serif;">Weddings &amp; Occasions</h4>
+          <p class="text-pink-200 text-sm text-center">Traditionally offered on thalis at every Indian wedding and festivity.</p>
+        </div>
+      </div>
+
+      <!-- Evening Rituals Card -->
+      <div class="flex-shrink-0 w-72 h-80 rounded-3xl shadow-lg overflow-hidden relative" style="background:linear-gradient(135deg,#7a4f1a,#c9843a);">
+        <img
+          src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=80"
+          alt="Evening chai ritual"
+          class="lifestyle-card-img"
+          onerror="this.style.display='none'"
+        />
+        <div class="lifestyle-card-content">
+          <div style="font-size:3rem;" class="mb-2">☕</div>
+          <h4 class="text-white font-bold text-lg" style="font-family:'Playfair Display',serif;">Evening Rituals</h4>
+          <p class="text-yellow-100 text-sm text-center">A spoonful of Badam Kesar Elaichi after chai — the daily luxury you deserve.</p>
+        </div>
+      </div>
+
+      <!-- Gift Card -->
+      <div class="flex-shrink-0 w-72 h-80 rounded-3xl shadow-lg overflow-hidden relative" style="background:linear-gradient(135deg,#1a2a4a,#2d4a7a);">
+        <img
+          src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80"
+          alt="Elegant gift box"
+          class="lifestyle-card-img"
+          onerror="this.style.display='none'"
+        />
+        <div class="lifestyle-card-content">
+          <div style="font-size:3rem;" class="mb-2">🎁</div>
+          <h4 class="text-white font-bold text-lg" style="font-family:'Playfair Display',serif;">Gift Someone Special</h4>
+          <p class="text-blue-200 text-sm text-center">Pack of Three makes the most thoughtful and elegant Indian gift.</p>
+        </div>
+      </div>
+
+      <!-- Daily Wellness Card -->
+      <div class="flex-shrink-0 w-72 h-80 rounded-3xl shadow-lg overflow-hidden relative" style="background:linear-gradient(135deg,#2d5a27,#4a7c59);">
+        <img
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80"
+          alt="Wellness and nature"
+          class="lifestyle-card-img"
+          onerror="this.style.display='none'"
+        />
+        <div class="lifestyle-card-content">
+          <div style="font-size:3rem;" class="mb-2">🧘</div>
+          <h4 class="text-white font-bold text-lg" style="font-family:'Playfair Display',serif;">Daily Wellness</h4>
+          <p class="text-green-100 text-sm text-center">Natural digestive herbs work gently — making Jalsa your wellness companion.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex justify-center gap-3 mt-6">
+      <button onclick="scrollLeft()" class="w-10 h-10 rounded-full border border-green-800 text-green-800 flex items-center justify-center hover:bg-green-800 hover:text-white transition-all">←</button>
+      <button onclick="scrollRight()" class="w-10 h-10 rounded-full border border-green-800 text-green-800 flex items-center justify-center hover:bg-green-800 hover:text-white transition-all">→</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================
+     INGREDIENTS SECTION
+============================= -->
+<section id="ingredients" class="py-24" style="background-color:#0d2b1e;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 fade-up">
+      <span class="text-xs tracking-widest uppercase text-yellow-400 font-semibold">What Goes Inside</span>
+      <h2 class="text-5xl font-black mt-2 mb-4 text-white" style="font-family:'Playfair Display',serif;">
+        Nature's Finest, <span class="shine-text">Undiluted</span>
+      </h2>
+      <div class="divider w-32 mb-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Ingredients visual with real product photo -->
+      <div class="fade-left text-center">
+        <div class="relative inline-block">
+          <!-- Hero tin photo as the central ingredient visual -->
+          <img
+            src="imj1.jpeg"
+            alt="Jalsa open tins showing natural ingredients"
+            class="rounded-full mx-auto shadow-2xl"
+            style="width:300px;height:300px;object-fit:cover;border:4px solid rgba(201,168,76,0.4);"
+          />
+          <!-- Orbiting ingredient emojis -->
+          <div class="absolute inset-0 animate-spin" style="animation-duration:20s;">
+            <span class="absolute text-3xl" style="top:0;left:50%;transform:translateX(-50%)">🌹</span>
+            <span class="absolute text-3xl" style="bottom:0;left:50%;transform:translateX(-50%)">🥥</span>
+            <span class="absolute text-3xl" style="top:50%;left:0;transform:translateY(-50%)">🌾</span>
+            <span class="absolute text-3xl" style="top:50%;right:0;transform:translateY(-50%)">🌿</span>
+          </div>
+        </div>
+        <p class="text-green-200 mt-6 italic text-lg" style="font-family:'Dancing Script',cursive;">"Purity you can taste."</p>
+      </div>
+
+      <!-- Right: Ingredient list -->
+      <div class="fade-right">
+        <div class="space-y-4">
+
+          <div class="flex items-center gap-4 p-4 rounded-2xl" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+            <span class="text-3xl">🌹</span>
+            <div>
+              <div class="text-white font-semibold">Gulkand &amp; Rose Petals</div>
+              <div class="text-green-300 text-sm">Cooling, anti-inflammatory, freshens breath naturally</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 p-4 rounded-2xl" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+            <span class="text-3xl">🥥</span>
+            <div>
+              <div class="text-white font-semibold">Coconut Shreds</div>
+              <div class="text-green-300 text-sm">Tropical sweetness, rich in medium-chain fatty acids</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 p-4 rounded-2xl" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+            <span class="text-3xl">🌾</span>
+            <div>
+              <div class="text-white font-semibold">Kesar (Saffron)</div>
+              <div class="text-green-300 text-sm">Mood-enhancing, antioxidant-rich Kashmir premium saffron</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 p-4 rounded-2xl" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+            <span class="text-3xl">🥜</span>
+            <div>
+              <div class="text-white font-semibold">Badam (Almonds)</div>
+              <div class="text-green-300 text-sm">Nutrient-dense, adds a satisfying crunch and nuttiness</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 p-4 rounded-2xl" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+            <span class="text-3xl">🌿</span>
+            <div>
+              <div class="text-white font-semibold">Elaichi (Green Cardamom)</div>
+              <div class="text-green-300 text-sm">The queen of spices — digestive, aromatic, long-lasting fresh</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 p-4 rounded-2xl" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);">
+            <span class="text-3xl">🍃</span>
+            <div>
+              <div class="text-white font-semibold">Pan (Betel Leaf)</div>
+              <div class="text-green-300 text-sm">Ancient Ayurvedic herb — antiseptic, digestive, and aromatic</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <span class="ingredient-tag text-yellow-200">🌱 100% Vegan</span>
+          <span class="ingredient-tag text-yellow-200">🚫 No Preservatives</span>
+          <span class="ingredient-tag text-yellow-200">✅ FSSAI Certified</span>
+          <span class="ingredient-tag text-yellow-200">💚 Ayurvedic Approved</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================
+     REVIEWS / SOCIAL PROOF
+============================= -->
+<section id="reviews" class="py-24" style="background-color:#fdf6ec;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16 fade-up">
+      <span class="text-xs tracking-widest uppercase text-yellow-600 font-semibold">Social Proof</span>
+      <h2 class="text-5xl font-black mt-2 mb-4" style="font-family:'Playfair Display',serif;color:#0d2b1e;">
+        Loved by <span style="-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#c9a84c,#e8c87a,#c9a84c);background-size:300%;-webkit-background-clip:text;animation:shimmer 4s infinite linear;background-clip:text;">50,000+</span> Families
+      </h2>
+      <div class="divider w-32 mb-4"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="testimonial-card bg-white rounded-3xl p-8 shadow-lg fade-up" style="transition-delay:0.1s;">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl font-black text-white" style="background:linear-gradient(135deg,#c9a84c,#e8c87a);">P</div>
+          <div>
+            <div class="font-bold" style="color:#0d2b1e;">Priya Sharma</div>
+            <div class="text-xs text-gray-400">Mumbai</div>
+          </div>
+        </div>
+        <div class="stars text-sm mb-3">★★★★★</div>
+        <p class="text-gray-600 text-sm leading-relaxed">"Badam Kesar Elaichi has become a daily ritual in our home after every meal. The aroma alone is worth it. Pure luxury in a tiny spoon!"</p>
+      </div>
+
+      <div class="testimonial-card bg-white rounded-3xl p-8 shadow-lg fade-up" style="transition-delay:0.2s;">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl font-black text-white" style="background:linear-gradient(135deg,#e8b4bc,#c4738a);">R</div>
+          <div>
+            <div class="font-bold" style="color:#0d2b1e;">Rahul Mehta</div>
+            <div class="text-xs text-gray-400">Delhi</div>
+          </div>
+        </div>
+        <div class="stars text-sm mb-3">★★★★★</div>
+        <p class="text-gray-600 text-sm leading-relaxed">"Ordered the Pack of Three for Diwali gifting — everyone absolutely loved it. Such a classy, unique gift. Will definitely reorder!"</p>
+      </div>
+
+      <div class="testimonial-card bg-white rounded-3xl p-8 shadow-lg fade-up" style="transition-delay:0.3s;">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl font-black text-white" style="background:linear-gradient(135deg,#1a4731,#2d6b4f);">A</div>
+          <div>
+            <div class="font-bold" style="color:#0d2b1e;">Anita Joshi</div>
+            <div class="text-xs text-gray-400">Pune</div>
+          </div>
+        </div>
+        <div class="stars text-sm mb-3">★★★★★</div>
+        <p class="text-gray-600 text-sm leading-relaxed">"Rose &amp; Gulkon is absolutely divine. It's the freshener I serve to all my guests at dinner parties. Jalsa has completely replaced everything else."</p>
+      </div>
+
+    </div>
+
+    <!-- Instagram Grid -->
+    
+
+  </div>
+</section>
+
+
+<!-- ============================
+     FINAL CTA SECTION
+============================= -->
+<section class="py-24 cta-parallax text-center">
+  <div class="leaf" style="font-size:3rem;top:10%;left:5%;animation-delay:0s;">🌿</div>
+  <div class="leaf" style="font-size:2rem;top:80%;right:8%;animation-delay:2s;">✨</div>
+  <div class="leaf" style="font-size:2.5rem;bottom:15%;left:15%;animation-delay:4s;">🌹</div>
+
+  <div class="max-w-3xl mx-auto px-6 relative z-10">
+    <div class="fade-up">
+      <!-- Product image in CTA -->
+      <img
+        src="img2.jpeg"
+        alt="Jalsa tins — all three flavours"
+        class="w-48 h-48 rounded-full object-cover mx-auto mb-8 shadow-2xl"
+        style="border:3px solid rgba(201,168,76,0.5);"
+      />
+      <h2 class="text-5xl md:text-6xl font-black text-white mb-6" style="font-family:'Playfair Display',serif;">
+        Ready to Refresh <br/>Your <span class="shine-text">Moments?</span>
+      </h2>
+      <p class="text-green-200 text-xl mb-10 leading-relaxed" style="font-family:'Dancing Script',cursive;">
+        Because every meal deserves a perfect ending.
+      </p>
+      <a href="#products" class="btn-gold px-14 py-5 rounded-full text-xl inline-block">
+        🛒 Shop Jalsa Now
+      </a>
+      <p class="text-green-300 text-sm mt-6">Free shipping above ₹500 · Cash on delivery available · All India delivery</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================
+     CONTACT & FOOTER
+============================= -->
+<section id="contact" class="py-24" style="background-color:#0a1f14;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+      <!-- Contact Form -->
+      <div class="fade-left">
+        <span class="text-xs tracking-widest uppercase text-yellow-400 font-semibold">Get In Touch</span>
+        <h2 class="text-4xl font-black text-white mt-2 mb-6" style="font-family:'Playfair Display',serif;">
+          Send Us Your <span class="shine-text">Message</span>
+        </h2>
+        <form onsubmit="submitForm(event)" class="space-y-4">
+          <input type="text" placeholder="Your Name" class="form-input w-full px-5 py-3 rounded-xl" required />
+          <input type="email" placeholder="Your Email" class="form-input w-full px-5 py-3 rounded-xl" required />
+          <input type="tel" placeholder="Phone Number (optional)" class="form-input w-full px-5 py-3 rounded-xl" />
+          <textarea rows="4" placeholder="Your Message" class="form-input w-full px-5 py-3 rounded-xl resize-none" required></textarea>
+          <button type="submit" class="btn-gold w-full py-4 rounded-xl font-bold">Send Message ✉️</button>
+        </form>
+      </div>
+
+      <!-- Contact Info + product image -->
+      <div class="fade-right space-y-8">
+        <div>
+          <span class="text-xs tracking-widest uppercase text-yellow-400 font-semibold">Our Details</span>
+          <h3 class="text-3xl font-black text-white mt-2 mb-6" style="font-family:'Playfair Display',serif;">We'd Love to Hear From You</h3>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <span class="text-2xl">📧</span>
+              <div>
+                <div class="text-yellow-300 text-sm font-semibold">Email</div>
+                <div class="text-green-200 text-sm">hello@jalsamymouthh.com</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-2xl">📱</span>
+              <div>
+                <div class="text-yellow-300 text-sm font-semibold">WhatsApp</div>
+                <div class="text-green-200 text-sm">+91 98765 43210</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="text-2xl">📍</span>
+              <div>
+                <div class="text-yellow-300 text-sm font-semibold">Location</div>
+                <div class="text-green-200 text-sm">Made with love in India 🇮🇳</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product image in contact section -->
+        <!-- <img
+          src="imj1.jpeg"
+          alt="Jalsa — Premium Mouth Freshener tins"
+          class="rounded-2xl shadow-xl w-full"
+          style="max-height:200px;object-fit:cover;border:1px solid rgba(201,168,76,0.2);"
+        /> -->
+
+        <!-- Social links -->
+        <div>
+          <p class="text-green-300 text-sm mb-3">Follow us on</p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all hover:scale-110" style="background:rgba(201,168,76,0.15);color:#c9a84c;">📸</a>
+            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all hover:scale-110" style="background:rgba(201,168,76,0.15);color:#c9a84c;">💬</a>
+            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all hover:scale-110" style="background:rgba(201,168,76,0.15);color:#c9a84c;">🐦</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-16 pt-8 border-t border-green-800 text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <div class="logo-icon" style="width:40px;height:40px;">
+          <span style="font-size:1.2rem;">🌿</span>
+        </div>
+        <span class="font-black text-xl tracking-widest shine-text" style="font-family:'Playfair Display',serif;">JALSA</span>
+      </div>
+      <p class="text-green-400 text-xs mb-2" style="font-family:'Dancing Script',cursive;font-size:1rem;">Greatness Shines from Within</p>
+      <p class="text-green-600 text-xs">© 2025 Jalsa myMouthh Fresheners. All rights reserved. | Greatness Shines from Within.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================
+     CART DRAWER
+============================= -->
+<div id="cart-drawer" class="fixed top-0 right-0 h-full w-80 z-50 transform translate-x-full transition-transform duration-300" style="background:#0a1f14;border-left:1px solid rgba(201,168,76,0.2);">
+  <div class="p-6 h-full flex flex-col">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-white font-bold text-xl" style="font-family:'Playfair Display',serif;">Your Cart 🛒</h3>
+      <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-2xl">×</button>
+    </div>
+    <div id="cart-items" class="flex-1 overflow-y-auto space-y-3">
+      <p class="text-green-400 text-sm text-center mt-8">Your cart is empty.<br/>Add a flavour to begin! 🌿</p>
+    </div>
+    <div class="border-t border-green-800 pt-4 mt-4">
+      <div class="flex justify-between text-white font-bold mb-4">
+        <span>Total</span>
+        <span id="cart-total">₹0</span>
+      </div>
+      <button onclick="checkout()" class="btn-gold w-full py-3 rounded-xl">Proceed to Checkout →</button>
+    </div>
+  </div>
+</div>
+<div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden" onclick="toggleCart()"></div>
+
+
+<!-- ============================
+     TOAST NOTIFICATION
+============================= -->
+<div id="toast" class="bg-green-800 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3">
+  <span class="text-xl">✅</span>
+  <span id="toast-msg">Added to cart!</span>
+</div>
+
+
+<!-- ============================
+     JAVASCRIPT
+============================= -->
+<script>
+  // ---- Scroll animations ----
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => observer.observe(el));
+
+  // ---- Navbar scroll ----
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ---- Mobile menu ----
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // ---- Cart state ----
+  let cart = [];
+
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, price, qty: 1 });
+    }
+    updateCartUI();
+    showToast(`${name} added to cart!`);
+  }
+
+  function updateCartUI() {
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cart-count').textContent = count;
+    document.getElementById('cart-total').textContent = `₹${total}`;
+    const itemsEl = document.getElementById('cart-items');
+    if (cart.length === 0) {
+      itemsEl.innerHTML = '<p class="text-green-400 text-sm text-center mt-8">Your cart is empty.<br/>Add a flavour to begin! 🌿</p>';
+    } else {
+      itemsEl.innerHTML = cart.map(item => `
+        <div class="flex items-center justify-between bg-white bg-opacity-5 rounded-xl p-3">
+          <div>
+            <div class="text-white text-sm font-semibold">${item.name}</div>
+            <div class="text-green-300 text-xs">₹${item.price} × ${item.qty}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQty('${item.name}', -1)" class="w-6 h-6 rounded-full bg-green-800 text-white text-xs flex items-center justify-center">−</button>
+            <span class="text-white text-sm">${item.qty}</span>
+            <button onclick="changeQty('${item.name}', 1)" class="w-6 h-6 rounded-full bg-green-800 text-white text-xs flex items-center justify-center">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  function changeQty(name, delta) {
+    const item = cart.find(i => i.name === name);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+    updateCartUI();
+  }
+
+  function toggleCart() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-overlay');
+    const isOpen = !drawer.classList.contains('translate-x-full');
+    drawer.classList.toggle('translate-x-full', isOpen);
+    overlay.classList.toggle('hidden', isOpen);
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      showToast('Add items to cart first! 🛒');
+      return;
+    }
+    showToast('Redirecting to checkout... ✨');
+    setTimeout(() => toggleCart(), 1500);
+  }
+
+  // ---- Toast ----
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // ---- Lifestyle scroll buttons ----
+  function scrollLeft() {
+    document.getElementById('lifestyleScroll').scrollBy({ left: -300, behavior: 'smooth' });
+  }
+  function scrollRight() {
+    document.getElementById('lifestyleScroll').scrollBy({ left: 300, behavior: 'smooth' });
+  }
+
+  // ---- Lifestyle drag scroll ----
+  const track = document.getElementById('lifestyleScroll');
+  let isDown = false, startX, scrollLeftPos;
+  track.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeftPos = track.scrollLeft; });
+  track.addEventListener('mouseleave', () => isDown = false);
+  track.addEventListener('mouseup', () => isDown = false);
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeftPos - (x - startX);
+  });
+
+  // ---- Contact form ----
+  function submitForm(e) {
+    e.preventDefault();
+    showToast('Message sent! We\'ll get back to you soon 💚');
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>
